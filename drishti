@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Go on a Date with Me, Dhruv?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: float 6s infinite linear;
+        }
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .heart:nth-child(7) { left: 70%; animation-delay: 0s; }
+        .heart:nth-child(8) { left: 80%; animation-delay: 1s; }
+        .heart:nth-child(9) { left: 90%; animation-delay: 2s; }
+        .heart:nth-child(10) { left: 100%; animation-delay: 3s; }
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            color: #e91e63;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .yes {
+            background-color: #4caf50;
+            color: white;
+        }
+        .no {
+            background-color: #f44336;
+            color: white;
+        }
+        .response {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts">
+        <div class="heart">❤️</div>
+        <div class="heart">💖</div>
+        <div class="heart">❤️</div>
+        <div class="heart">💖</div>
+        <div class="heart">❤️</div>
+        <div class="heart">💖</div>
+        <div class="heart">❤️</div>
+        <div class="heart">💖</div>
+        <div class="heart">❤️</div>
+        <div class="heart">💖</div>
+    </div>
+    <div class="container">
+        <h1>Will You Go on a Date with Me, Dhruv?</h1>
+        <p id="message">Hey Dhruv, I've been thinking about you a lot, and I'd love to take you out to a park in the evening. What do you say?</p>
+        <button class="yes" onclick="respond('yes')">Yes!</button>
+        <button class="no" onclick="respond('no')">No, thanks.</button>
+        <div id="response" class="response"></div>
+        <button id="tryAgain" class="hidden" onclick="tryAgain()">Try Again?</button>
+    </div>
+
+    <script>
+        let noCount = 0;
+        const messages = [
+            "Hey Dhruv, I've been thinking about you a lot, and I'd love to take you out to a park in the evening. What do you say?",
+            "Come on, Dhruv, a walk in the park at sunset sounds perfect! Please say yes?",
+            "Dhruv, you're amazing – let's make some memories at the park tonight!",
+            "Okay, one more try: Park date with me? Pretty please?",
+            "Dhruv, I won't give up! Park in the evening, just you and me?"
+        ];
+
+        function respond(answer) {
+            const responseDiv = document.getElementById('response');
+            const tryAgainBtn = document.getElementById('tryAgain');
+            if (answer === 'yes') {
+                responseDiv.innerHTML = "Yay! Let's plan it soon. ❤️";
+                responseDiv.style.color = "#4caf50";
+                tryAgainBtn.classList.add('hidden');
+            } else {
+                noCount++;
+                if (noCount < 5) {
+                    responseDiv.innerHTML = "Aww, maybe I can change your mind? 😊";
+                    responseDiv.style.color = "#f44336";
+                    setTimeout(() => {
+                        document.getElementById('message').innerHTML = messages[noCount];
+                        responseDiv.innerHTML = "";
+                        tryAgainBtn.classList.remove('hidden');
+                    }, 2000);
+                } else {
+                    responseDiv.innerHTML = "Alright, I get it. No hard feelings! Maybe another time. 😊";
+                    responseDiv.style.color = "#f44336";
+                    tryAgainBtn.classList.add('hidden');
+                }
+            }
+        }
+
+        function tryAgain() {
+            document.getElementById('response').innerHTML = "";
+            document.getElementById('tryAgain').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
